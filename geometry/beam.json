@@ -1,0 +1,20 @@
+{
+"beam_profile": "tophat",
+"beam_vec": [
+0.0,
+0.0,
+1.0
+],
+"diameter_fwhm": 1e-06,
+"divergence_fwhm": 0.0,
+"photon_energy": 1.132143158921946e-15,
+"photon_energy_fwhm": 0.0,
+"polarization_vec": [
+0,
+1.0,
+0.0
+],
+"polarization_weight": 1.0,
+"pulse_energy": 0.001,
+"pulse_energy_fwhm": 0.0
+}

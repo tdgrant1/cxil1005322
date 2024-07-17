@@ -139,9 +139,9 @@ def view_runstats(stats=None, geom=None, mask=None, hstgrm=True, **kwargs):
                 pad_geometry=geom, n_q_bins=n_q, q_range=q_range, beam=beam
             )
             imv.add_plot(q_bins / 1e10, median_profile)
-    plot = pg.plot(stats["sums"], pen=None, symbol="o", symbolBrush="w")
-    plot.setLabel("bottom", "Frame Number")
-    plot.setLabel("left", "Integrated PAD Intensiy")
+    # plot = pg.plot(stats["sums"], pen=None, symbol="o", symbolBrush="w")
+    # plot.setLabel("bottom", "Frame Number")
+    # plot.setLabel("left", "Integrated PAD Intensiy")
     analysis.runstats.view_padstats(stats, start=True, histogram=hstgrm)
     '''
     pv = analysis.runstats.view_padstats(stats, start=False, histogram=true)

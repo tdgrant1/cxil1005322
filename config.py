@@ -14,7 +14,7 @@ def default_config(detector='jungfrau'):
     # possible keys: results_directory, cachedir
     config = dict(experiment_id='cxil1005322',
                   results_directory='results',
-                  hdf5_directory="/sdf/data/lcls/ds/cxi/cxil1005322/results/analysis/reborn_hdf5",
+                  hdf5_directory="/sdf/data/lcls/ds/cxi/cxil1005322/results/cxil1005322/hdf5/",
                   cachedir='cache/',
                   debug=1,
                   joblib_directory="results/joblib",
@@ -31,7 +31,8 @@ def default_config(detector='jungfrau'):
     jungfrau_geometry_file = './geometry/jungfrau4M_AgBeh.json'
     jungfrau_masks = [
     "geometry/edge_mask.mask",
-    # "geometry/jungfrau_edges_belowstd-outer_abovestd-inner.mask"
+    "geometry/jungfrau_edges_belowstd-outer_abovestd-inner.mask",
+    "geometry/jungfrau_dark_spot.mask",
     ]
     jungfrau4m = dict(pad_id='jungfrau4M',
                       geometry=PADGeometryList(filepath=jungfrau_geometry_file),
@@ -98,12 +99,105 @@ def get_config(run_number, detector="jungfrau"):
     config['run_number'] = run_number
     config['runstats']['checkpoint_file'] = results + "checkpoints/" + run
     config['runstats']['log_file'] = results + "logs/" + run 
-    if run_number == 64:
-        config['pad_detectors'][0]['mask'].append('geometry/r0064-rectangular-aperture.mask')
-    #try:
-        #config['detectors'][0]['mask'].append('RUN_SPECIFIC_MASK.mask')
-    #except KeyError:
-        #config['detectors'][0].update(dict(mask='RUN_SPECIFIC_MASK.mask'))
+    if detector == "jungfrau":
+        if run_number in range(12,19):
+            config['pad_detectors'][0]['mask'].append('geometry/rebecca_run12-18.mask')
+        elif run_number in range(21,26):
+            config['pad_detectors'][0]['mask'].append('geometry/samantha_run21-25.mask')
+        elif run_number in range(27,30):
+            config['pad_detectors'][0]['mask'].append('geometry/rebecca_run27-29.mask')
+        elif run_number in range(30,33):
+            config['pad_detectors'][0]['mask'].append('geometry/rebecca_run30-32.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_r32_weird_min_pixels.mask')
+        elif run_number in range(37,48):
+            config['pad_detectors'][0]['mask'].append('geometry/nelly_run37-47.mask')
+        elif run_number in range(49,52):
+            config['pad_detectors'][0]['mask'].append('geometry/nelly_run49-51.mask')
+        elif run_number in range(53,66):
+            config['pad_detectors'][0]['mask'].append('geometry/nelly_run53-65.mask')
+        elif run_number in range(56,69):
+            config['pad_detectors'][0]['mask'].append('geometry/nelly_run66-68.mask')
+        elif run_number in range(72,78):
+            config['pad_detectors'][0]['mask'].append('geometry/nelly_run72-77.mask')
+        elif run_number in range(79,82):
+            config['pad_detectors'][0]['mask'].append('geometry/felicity_run79-81.mask')
+        elif run_number in range(83,85):
+            config['pad_detectors'][0]['mask'].append('geometry/felicity_run83-84.mask')
+        elif run_number == 86:
+            config['pad_detectors'][0]['mask'].append('geometry/felicity_run86.mask')
+        elif run_number in range(87,91):
+            config['pad_detectors'][0]['mask'].append('geometry/felicity_run87-90.mask')
+        elif run_number == 91:
+            config['pad_detectors'][0]['mask'].append('geometry/felicity_run91.mask')
+        elif run_number in range(82,95):
+            config['pad_detectors'][0]['mask'].append('geometry/felicity_run92-94.mask')
+        elif run_number in range(96,99):
+            config['pad_detectors'][0]['mask'].append('geometry/felicity_run96-98.mask')
+        elif run_number in range(99,103):
+            config['pad_detectors'][0]['mask'].append('geometry/felicity_run99-102.mask')
+        elif run_number in range(106,121):
+            config['pad_detectors'][0]['mask'].append('geometry/melody_run106-120.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run106-120.mask')
+        elif run_number in range(122,125):
+            config['pad_detectors'][0]['mask'].append('geometry/kaya_run122-124.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run122-124.mask')
+        elif run_number in range(125,128):
+            config['pad_detectors'][0]['mask'].append('geometry/kaya_run125-127.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run125-127.mask')
+        elif run_number in range(128,135):
+            config['pad_detectors'][0]['mask'].append('geometry/kaya_run128-134.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run128-134.mask')
+        elif run_number in range(135,140):
+            config['pad_detectors'][0]['mask'].append('geometry/kaya_run135-139.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run135-139.mask')
+        elif run_number in range(141,144):
+            config['pad_detectors'][0]['mask'].append('geometry/samantha_run141-143.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run141-143.mask')
+        elif run_number in range(145,147):
+            config['pad_detectors'][0]['mask'].append('geometry/samantha_run145-146.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run144-146.mask')
+        elif run_number in range(149,156):
+            config['pad_detectors'][0]['mask'].append('geometry/samantha_run149-155.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run149-155.mask')
+        elif run_number in range(156,159):
+            config['pad_detectors'][0]['mask'].append('geometry/samantha_run156-158.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run156-158.mask')
+        elif run_number in range(168,175):
+            config['pad_detectors'][0]['mask'].append('geometry/elizabeth_run168-174.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run168-174.mask')
+        elif run_number in range(176,187):
+            config['pad_detectors'][0]['mask'].append('geometry/elizabeth_run176-186.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run176-186.mask')
+        elif run_number in range(187,194):
+            config['pad_detectors'][0]['mask'].append('geometry/elizabeth_run187-193.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run187-193.mask')
+        elif run_number in range(197,205):
+            config['pad_detectors'][0]['mask'].append('geometry/kirsten_run197-204.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run197-204.mask')
+        elif run_number in range(205,218):
+            config['pad_detectors'][0]['mask'].append('geometry/kirsten_run205-217.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run205-217.mask')
+        elif run_number in range(222,224):
+            config['pad_detectors'][0]['mask'].append('geometry/kirsten_run222-223.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run222-223.mask')
+        elif run_number in range(227,234):
+            config['pad_detectors'][0]['mask'].append('geometry/cecile_run227-233.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run227-233.mask')
+        elif run_number in range(235,252):
+            config['pad_detectors'][0]['mask'].append('geometry/cecile_run235-251.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run235-251.mask')
+        elif run_number in range(255,263):
+            config['pad_detectors'][0]['mask'].append('geometry/maryellen_run255-262.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run255-262.mask')
+        elif run_number in range(263,266):
+            config['pad_detectors'][0]['mask'].append('geometry/maryellen_run263-265.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run263-265.mask')
+        elif run_number in range(266,274):
+            config['pad_detectors'][0]['mask'].append('geometry/maryellen_run266-273.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run266-273.mask')
+        elif run_number in range(274,282):
+            config['pad_detectors'][0]['mask'].append('geometry/maryellen_run274-281.mask')
+            config['pad_detectors'][0]['mask'].append('geometry/jungfrau_diode_mask_run274-281.mask')
     config['runstats']['message_prefix'] = f"Run {run_number}: "
     return config
 

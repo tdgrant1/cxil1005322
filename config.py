@@ -28,11 +28,12 @@ def default_config(detector='jungfrau'):
     #           motions: dictionary
     #                    example: {'epics_pv':'CXI:DS1:MMS:06.RBV', 'vector':[0, 0, 1e-3]}
 
-    jungfrau_geometry_file = './geometry/jungfrau4M_AgBeh.json'
+    #jungfrau_geometry_file = './geometry/jungfrau4M_AgBeh.json'
+    jungfrau_geometry_file = './geometry/tom_agbe_run7_fitellipse_fixdistance.json'
     jungfrau_masks = [
-    "geometry/edge_mask.mask",
-    "geometry/jungfrau_edges_belowstd-outer_abovestd-inner.mask",
-    "geometry/jungfrau_dark_spot.mask",
+    # "geometry/edge_mask.mask",
+    # "geometry/jungfrau_edges_belowstd-outer_abovestd-inner.mask",
+    # "geometry/jungfrau_dark_spot.mask",
     ]
     jungfrau4m = dict(pad_id='jungfrau4M',
                       geometry=PADGeometryList(filepath=jungfrau_geometry_file),

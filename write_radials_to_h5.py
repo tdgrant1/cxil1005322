@@ -214,7 +214,6 @@ class MyParallelRadialProfiler(ParallelAnalyzer):
         """
         return self.radials
 
-
     def from_dict(self, stats: dict):
         self.radials["sum"] = stats["sum"]
         self.radials["sum2"] = stats["sum2"]
@@ -231,6 +230,7 @@ class MyParallelRadialProfiler(ParallelAnalyzer):
         self.radials["pad_geometry"] = stats["pad_geometry"]
         self.radials["beam"] = stats["beam"]
         self.radials["mask"] = stats["mask"]
+
 
 class MyLCLSFrameGetter(LCLSFrameGetter):
     def __init__(self, other_detectors_pv=None, mask=None, **kwargs):
@@ -348,6 +348,8 @@ def get_radials(run_number=1, n_processes=1, start=0, stop=None, detector="jungf
     # # mask = df.get_mask_flat()
     # mask = df.get_mask_list()
 
+    q = geom.q_mags(beam)
+
     # pv = PADView(frame_getter=framegetter, mask=mask)
     # pv.start()
 
@@ -398,7 +400,8 @@ if __name__ == "__main__":
 
     conf = config.get_config(args.run, args.detector)
 
-    output = conf["hdf5_directory"] + conf["experiment_id"] + "_r" + str(args.run) + "_" + args.detector + ".h5"
+    # output = conf["hdf5_directory"] + conf["experiment_id"] + "_r" + str(args.run) + "_" + args.detector + ".h5"
+    output = f'{conf["hdf5_directory"]}{conf["experiment_id"]}_r{args.run:04d}_{args.detector}.h5'
 
     print(output)
 
